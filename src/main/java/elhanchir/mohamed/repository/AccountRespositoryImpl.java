@@ -12,6 +12,17 @@ import java.util.function.Predicate;
 
 public class AccountRespositoryImpl implements AccountRespository {
 
+    private static final AccountRespositoryImpl accountRespository;
+
+    static {
+        accountRespository = new AccountRespositoryImpl();
+    }
+
+
+    private AccountRespositoryImpl() {
+    }
+
+
     private Map<Long, BankAccount> accounts=new HashMap<>();
     private Long accountId=0L;
 
@@ -70,5 +81,9 @@ public class AccountRespositoryImpl implements AccountRespository {
 
             save(bankAccount);
         }
+    }
+
+    public static AccountRespositoryImpl getInstance(){
+        return accountRespository;
     }
 }

@@ -3,7 +3,7 @@ package elhanchir.mohamed.model;
 import elhanchir.mohamed.enums.AccountStatus;
 import elhanchir.mohamed.enums.AccountType;
 
-public class BankAccount {
+public class BankAccount implements Cloneable{
     private Long accountId;
     private double balance;
     private String currency;
@@ -70,6 +70,11 @@ public class BankAccount {
                 ", accountType=" + accountType +
                 ", accountStatus=" + accountStatus +
                 '}';
+    }
+
+    @Override
+    public BankAccount clone() throws CloneNotSupportedException {
+        return (BankAccount) super.clone();
     }
 
     public static AccountBuilder builder(){

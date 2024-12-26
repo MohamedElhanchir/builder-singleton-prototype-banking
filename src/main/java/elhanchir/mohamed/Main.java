@@ -8,8 +8,9 @@ import elhanchir.mohamed.repository.AccountRespositoryImpl;
 import java.util.function.Predicate;
 
 public class Main {
-    public static void main(String[] args) {
-        AccountRespositoryImpl accountRespository = new AccountRespositoryImpl();
+    public static void main(String[] args) throws CloneNotSupportedException {
+        //AccountRespositoryImpl accountRespository = new AccountRespositoryImpl();
+        AccountRespositoryImpl accountRespository = AccountRespositoryImpl.getInstance();
         JsonSerializer<BankAccount> bankAccountJsonSerializer = new JsonSerializer<>();
 
         accountRespository.populateData2();
@@ -30,6 +31,13 @@ public class Main {
             }
         }).forEach(account -> System.out.println(bankAccountJsonSerializer.serialize(account)));*/
 
+        BankAccount account = accountRespository.findById(1L).get();
+        BankAccount accountClone = account.clone();
+        BankAccount account2=account;
 
+        //affichage de @ mémoire
+        System.out.println(System.identityHashCode(account));
+        System.out.println(System.identityHashCode(account2));
+        System.out.println(System.identityHashCode(accountClone));
     }
 }
